@@ -1,26 +1,33 @@
 import operator
-
-# Define a dictionary of operations
-operations = {
-    '+': operator.add,
-    '-': operator.sub,
-    '*': operator.mul,
-    '/': operator.truediv
-}
+import math
 
 def calculator(num1, operator, num2):
     try:
-        return operations[operator](num1, num2)
-    except KeyError:
-        return "Invalid operator"
+        if operator == '+':
+            return operator.add(num1, num2)
+        elif operator == '-':
+            return operator.sub(num1, num2)
+        elif operator == '*':
+            return operator.mul(num1, num2)
+        elif operator == '/':
+            return operator.truediv(num1, num2)
+        elif operator == '^':
+            return operator.pow(num1, num2)
+        elif operator == 'sqrt':
+            return math.sqrt(num1)
+        else:
+            raise ValueError("Invalid operator")
     except ZeroDivisionError:
         return "Cannot divide by zero!"
 
 print("Welcome to Calculator.py")
 
 num1 = float(input("Enter first number: "))
-operator = input("Enter operator (+, -, *, /): ")
-num2 = float(input("Enter second number: "))
+operator = input("Enter operator (+, -, *, /,^,sqrt): ")
+if operator != 'sqrt':
+    num2 = float(input("Enter second number: "))
+    result = calculator(num1, operator, num2)
+else:
+    result = calculator(num1, operator, None)
 
-result = calculator(num1, operator, num2)
-print(num1, operator, num2, "=", result)
+print(num1, operator, num2 if operator != 'sqrt' else '', "=", result)
