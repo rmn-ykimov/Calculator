@@ -8,9 +8,7 @@ def calculator(num1, operator, num2=None):
     elif operator == '*':
         return num1 * num2
     elif operator == '/':
-        if num2 == 0:
-            raise ZeroDivisionError("Cannot divide by zero!")
-        return num1 / num2
+        return num1 / num2 if num2 != 0 else "Cannot divide by zero!"
     elif operator == '^':
         return num1 ** num2
     elif operator == 'sqrt':
@@ -19,13 +17,8 @@ def calculator(num1, operator, num2=None):
         raise ValueError("Invalid operator")
 
 print("Welcome to Calculator.py")
-
 num1 = float(input("Enter first number: "))
 operator = input("Enter operator (+, -, *, /,^,sqrt): ")
-if operator != 'sqrt':
-    num2 = float(input("Enter second number: "))
-    result = calculator(num1, operator, num2)
-else:
-    result = calculator(num1, operator)
 
-print(num1, operator, num2 if operator != 'sqrt' else '', "=", result)
+result = calculator(num1, operator, float(input("Enter second number: ")) if operator not in ('sqrt','/') else None)
+print(num1, operator, num2 if operator not in ('sqrt','/') else '', "=", result)
