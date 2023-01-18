@@ -1,41 +1,26 @@
-def add(x, y):
-    return x + y
+import operator
 
-def subtract(x, y):
-    return x - y
+# Define a dictionary of operations
+operations = {
+    '+': operator.add,
+    '-': operator.sub,
+    '*': operator.mul,
+    '/': operator.truediv
+}
 
-def multiply(x, y):
-    return x * y
+def calculator(num1, operator, num2):
+    try:
+        return operations[operator](num1, num2)
+    except KeyError:
+        return "Invalid operator"
+    except ZeroDivisionError:
+        return "Cannot divide by zero!"
 
-def divide(x, y):
-    if y == 0:
-        raise ValueError("Cannot divide by zero!")
-    return x / y
-
-print("Select operation.")
-print("1.Add")
-print("2.Subtract")
-print("3.Multiply")
-print("4.Divide")
-
-choice = input("Enter choice(1/2/3/4): ")
+print("Welcome to Calculator.py")
 
 num1 = float(input("Enter first number: "))
+operator = input("Enter operator (+, -, *, /): ")
 num2 = float(input("Enter second number: "))
 
-if choice == '1':
-    print(num1, "+", num2, "=", add(num1, num2))
-
-elif choice == '2':
-    print(num1, "-", num2, "=", subtract(num1, num2))
-
-elif choice == '3':
-    print(num1, "*", num2, "=", multiply(num1, num2))
-
-elif choice == '4':
-    try:
-        print(num1, "/", num2, "=", divide(num1, num2))
-    except ValueError as e:
-        print(e)
-else:
-    print("Invalid Input")
+result = calculator(num1, operator, num2)
+print(num1, operator, num2, "=", result)
