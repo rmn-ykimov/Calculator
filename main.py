@@ -1,34 +1,18 @@
-import math
+"""
+This module performs basic arithmetic operations based on user input.
 
-def calculator(num1, operator, num2=None):
-    """
-    Calculates the result of num1 and num2 based on the operator.
-    If the operator is 'sqrt', it returns the square root of num1.
-    If the operator is '/' and num2 is 0, it returns "Cannot divide by zero!".
-    """
-    if operator == '+':
-        return num1 + num2
-    elif operator == '-':
-        return num1 - num2
-    elif operator == '*':
-        return num1 * num2
-    elif operator == '/':
-        return num1 / num2 if num2 != 0 else "Cannot divide by zero!"
-    elif operator == '^':
-        return num1 ** num2
-    elif operator == 'sqrt':
-        return math.sqrt(num1)
-    else:
-        raise ValueError(f"Invalid operator: {operator}")
+The module imports `input_module` and `logic` to retrieve two numbers and an
+operator from the user and calculate the result of the operation. The result of
+the calculation is printed if it is not None.
+"""
+if __name__ == "__main__":
+    import input_module
+    import logic
 
-print("Welcome to Calculator")
-first_number = float(input("Enter first number: "))
-operator = input("Enter operator (+, -, *, /,^,sqrt): ")
+    first_number = input_module.get_number()
+    operator = input_module.get_operation()
+    second_number = input_module.get_number()
 
-if operator in ('sqrt','/'):
-    result = calculator(first_number, operator)
-else:
-    second_number = float(input("Enter second number: "))
-    result = calculator(first_number, operator, second_number)
-
-print(f"{first_number} {operator} {second_number if operator not in ('sqrt','/') else ''} = {result}")
+    result = logic.logic(first_number, operator, second_number)
+    if result is not None:
+        print(f"Result: {result}")
