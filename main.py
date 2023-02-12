@@ -1,6 +1,11 @@
 import math
 
 def calculator(num1, operator, num2=None):
+    """
+    Calculates the result of num1 and num2 based on the operator.
+    If the operator is 'sqrt', it returns the square root of num1.
+    If the operator is '/' and num2 is 0, it returns "Cannot divide by zero!".
+    """
     if operator == '+':
         return num1 + num2
     elif operator == '-':
@@ -14,11 +19,16 @@ def calculator(num1, operator, num2=None):
     elif operator == 'sqrt':
         return math.sqrt(num1)
     else:
-        raise ValueError("Invalid operator")
+        raise ValueError(f"Invalid operator: {operator}")
 
-print("Welcome to Calculator.py")
-num1 = float(input("Enter first number: "))
+print("Welcome to Calculator")
+first_number = float(input("Enter first number: "))
 operator = input("Enter operator (+, -, *, /,^,sqrt): ")
 
-result = calculator(num1, operator, float(input("Enter second number: ")) if operator not in ('sqrt','/') else None)
-print(num1, operator, num2 if operator not in ('sqrt','/') else '', "=", result)
+if operator in ('sqrt','/'):
+    result = calculator(first_number, operator)
+else:
+    second_number = float(input("Enter second number: "))
+    result = calculator(first_number, operator, second_number)
+
+print(f"{first_number} {operator} {second_number if operator not in ('sqrt','/') else ''} = {result}")
